@@ -34,7 +34,6 @@ Le déploiement se fait sur un serveur spécifique et utilise des outils IaC. On
 * Toutes ces variables sont prises en compte dans un `Jenkinsfile` que Jenkins lira et interprétera.
 
 ## Les images docker utilisées pour les conteneurs:
-- mariabdb:latest
-- pschiffe/pdns-mysql:latest
-- powerdnsadmin/pda-legacy
-- nginx:latest
+- [mariadb:latest](https://hub.docker.com/_/mariadb)
+- [pschiffe/pdns-mysql:latest](https://hub.docker.com/r/pschiffe/pdns-mysql)
+- [powerdnsadmin/pda-legacy](https://hub.docker.com/r/powerdnsadmin/pda-legacy)
