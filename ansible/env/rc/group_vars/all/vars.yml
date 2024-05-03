@@ -1,0 +1,5 @@
+# Variable globales pdns
+pdns_servername: pdns.uat.local.ca
+pdns_pdns_domaine: uat.local.ca
+pdns_pdns_ip: 192.168.56.70
+roles_path: ~/.ansible/roles

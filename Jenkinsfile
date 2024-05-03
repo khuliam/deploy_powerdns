@@ -22,7 +22,7 @@ EOF
 '''
 			echo 'Generate vars.yml file'
 			sh '''
-cat > ./ansible/env/dev/group_vars/all/vars.yml <<EOF
+cat > ./ansible/env/${ENV}/group_vars/all/vars.yml <<EOF
 # Variable globale pdns
 pdns_servername: ${SERVER_HOSTNAME}
 pdns_pdns_ip: ${PDNS_SERVER_IP}
