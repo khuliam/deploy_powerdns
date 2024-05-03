@@ -10,8 +10,8 @@
 ## Les prérequis
 Le déploiement se fait sur un serveur spécifique et utilise des outils IaC. On aura besoin des outils/serveurs suivants : 
 - Un serveur `Jenkins` : sur lequel seront créés et exécutés nos pipelines.
-- Un serveur `Ansible` : minimum la version 2.10.17. C'est sur ce serveur que seront lancés nos playbooks Ansible. Il faudra installer la community_collection d'Ansible.
-- Un serveur `powerdns`: Une machine virtuelle `Debian 12` sur laquelle sont installés les outils suivants :
+- Un serveur `Ansible` : minimum la version 2.10.17. C'est sur ce serveur que seront lancés nos playbooks Ansible. Il faudra installer la community.general d'Ansible (`ansible-galaxy collection install community.general`).
+- Un serveur `powerdns`: Une machine virtuelle `Debian 12` sur laquelle est installé les outils suivants :
     - Docker
     - Docker-compose
     - Les modules Python :
