@@ -1,0 +1,22 @@
+- name: Test de la disponibilité du service powerdns
+  hosts: all
+  pre_tasks:
+    - name: Include vars vault file
+      ansible.builtin.include_vars:
+        dir: ../env/dev/group_vars/all
+        extensions:
+          - 'yml'
+
+  tasks:
+    - name: Tester l'accès à la page web de pdns
+      ansible.builtin.uri:
+        url: "http://{{ pdns_servername }}:8080"
+        validate_certs: false
+      register: webpage_response
+      until: webpage_response.status == 200
+      retries: 18  # 3 minutes / 10 secondes = 18 tentatives
+      delay: 10
+
+    - name: Résultalt du test de disponibilité de pdns
+      ansible.builtin.debug:
+        msg: "Serice PDNS : {{ 'ACCESSIBLE' if webpage_response.status == 200 else 'pas ACCESSIBLE' }}"

@@ -1,0 +1,20 @@
+- name: Realisation des actions dans keycloak
+  hosts: all
+  pre_tasks:
+    - name: Include vars vault file
+      ansible.builtin.include_vars:
+        dir: ./env/dev/group_vars/all
+        extensions:
+          - 'yml'
+
+    - name: Cloner le role powerdns
+      ansible.builtin.git:
+        repo: "https://github.com/khuliam/powerdns.git"
+        dest: "{{ roles_path }}/powerdns"
+        version: main
+      delegate_to: localhost
+
+  tasks:
+    - name: "Dépploiement du service powerdns"
+      ansible.builtin.include_role:
+        name: powerdns
