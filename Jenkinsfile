@@ -1,6 +1,18 @@
 pipeline {
     agent any
 
+	parameters {
+		choice(name: 'ENV', choices: ['dev','rc','prod'], description: 'Choisisez environnement de déploiement')
+        string(name: 'SERVER_HOSTNAME', defaultValue: 'pdns.dev.local.ca', description: 'Le nom du serveur sur lequel déployer les certificats')
+		string(name: 'SERVER_USER', defaultValue: 'vagrant', description: 'Le nom de l\'utilisateur du serveur')
+		password(name: 'SERVER_PASSWORD', defaultValue: 'vagrant', description: 'Le mot de passe du serveur')
+		string(name: 'PDNS_SERVER_IP', defaultValue: '192.168.56.66', description: 'L''adresse IP du serveru pdns')
+		string(name: 'PDNS_DOMAINE', defaultValue: 'dev.local.ca', description: 'Le domaine à créer dans le serveur pdns')
+        choice(name: 'ANSIBLE_VM_HOSTNAME', choices: ['ansible.dev.local.ca'], description: 'Le hostname du serveur ansible')
+        choice(name: 'ANSIBLE_VM_USER', choices: ['vagrant'], description: 'Le user du serveur ansible')
+        password(name: 'ANSIBLE_VM_PASSWORD', defaultValue: 'vagrant', description: 'Le mot de passe du serveur ansible')
+	}
+
     stages {
 	stage('Build') {
 	    steps { 
@@ -8,7 +20,7 @@ pipeline {
 			echo 'Building...'
 			echo 'Generate 00_inventory.yml file'
             sh '''
-cat > ./ansible/env/dev/00_inventory.yml <<EOF
+cat > ./ansible/env/${ENV}/00_inventory.yml <<EOF
 all:
   hosts:
     ${SERVER_HOSTNAME}:
